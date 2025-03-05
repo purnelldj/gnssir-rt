@@ -3,7 +3,7 @@ import pickle
 
 import numpy as np
 
-from gnssir_rt.make_gpt import gpt2_1w, makegptfile
+from gnssir.make_gpt import gpt2_1w, makegptfile
 
 
 def tropd(gpst, rh_arr, iminelv=4, imaxelv=5, irh=1, iahgt=12, it=0, adjtype="allelv", **kwargs):

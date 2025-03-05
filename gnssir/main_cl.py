@@ -3,7 +3,7 @@ from datetime import datetime
 import hydra
 from omegaconf import DictConfig
 
-from gnssir_rt.processing import arcs2splines, arcsplot, snr2arcs
+from gnssir.processing import arcs2splines, arcsplot, snr2arcs
 
 
 @hydra.main(config_path="configs/", config_name="main", version_base=None)

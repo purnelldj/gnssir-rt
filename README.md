@@ -1,12 +1,12 @@
-# gnssir_rt
+# gnssir-rt
 This software is to go with "Real-time water levels using GNSS-IR: a potential tool for flood monitoring" by Purnell et al. (Geophysical Research Letters)
 All code written by David Purnell except for gnssr/make_gpt.py (written by Kristine Larson)
 
 ## Installation
 clone and cd into repository root
 ```
-git clone https://github.com/purnelldj/gnssir_rt.git
-cd gnssir_rt
+git clone https://github.com/purnelldj/gnssir-rt.git
+cd gnssir-rt
 ```
 create and install a venv or conda env as preferred and then install dependencies
 ```
@@ -40,7 +40,7 @@ this command should produce the following plot:
 ```
 gnssir site=[station] task=[funcname]
 ```
-* `[site]` corresponds to a config file: `gnssir_rt/configs/site/[site].yaml` (either `sjdlr` or `rv3s`)
+* `[site]` corresponds to a config file: `gnssir/configs/site/[site].yaml` (either `sjdlr` or `rv3s`)
 * `[task]` is one of `snr2arcs`, `arcsplot` or `arcs2splines`
 You can edit the config files as desired, or add new ones.
 

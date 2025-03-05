@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.dates import DateFormatter
 
-from gnssir_rt.helper import cubspl_nans, gps2datenum
+from gnssir.helper import cubspl_nans, gps2datenum
 
 
 def plotrhspline(

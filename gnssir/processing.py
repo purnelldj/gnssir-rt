@@ -9,8 +9,8 @@ from astropy.timeseries import LombScargle
 from scipy.optimize import leastsq
 from scipy.signal import find_peaks
 
-from gnssir_rt.elv_interp import elv_interp_array
-from gnssir_rt.helper import (
+from gnssir.elv_interp import elv_interp_array
+from gnssir.helper import (
     cubspl_nans,
     datetime2gps,
     glonasswlen,
@@ -18,8 +18,8 @@ from gnssir_rt.helper import (
     readsnrtxt,
     residuals_cubspl_spectral,
 )
-from gnssir_rt.plot import plotrhspline
-from gnssir_rt.tropd import tropd
+from gnssir.plot import plotrhspline
+from gnssir.tropd import tropd
 
 
 def snr2arc(
