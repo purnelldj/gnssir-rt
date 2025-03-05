@@ -34,7 +34,7 @@ gnssir site=sjdlr task=arcs2splines
 ```
 this command should produce the following plot:
 
-![spline output](sjdlr_oneday.png "test output")
+![spline output](./images/sjdlr_oneday.png "test output")
 
 ### general usage
 ```
