@@ -1,5 +1,5 @@
 [project]
-name = "gnssir_rt"
+name = "gnssir-rt"
 version = "1.1.0"
 description = "processing tools for GNSS-IR water level monitoring"
 authors = [
@@ -28,8 +28,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project.scripts]
-gnssir = "gnssir_rt.main_cl:main"
+gnssir = "gnssir.main_cl:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["gnssir_rt"]
+include = ["gnssir"]
