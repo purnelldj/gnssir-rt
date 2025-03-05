@@ -1,6 +1,6 @@
 from pytest import approx
 
-from gnssir_rt.elv_interp import elv_interp_array
+from gnssir.elv_interp import elv_interp_array
 
 
 # taking 1hr from one antenna
