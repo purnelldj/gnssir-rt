@@ -1,10 +1,43 @@
-.venv/
-temp_outputs/
-**/__pycache__
+# local data
+data/
+
+# Python
 __pycache__/
-*.pyc
-archive/
-localproc/
-**/.DS_Store
-.DS_Store
+*.py[cod]
+env/
+venv/
+.venv/
+*.egg-info/
+
+# Logs
+logs/
+*.log
+*.out
 outputs/
+
+# Build artifacts
+dist/
+build/
+
+# IDE-specific files
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Environment variables and secrets
+.env
+*.key
+*.pem
+*.crt
+config/secrets.yml
+
+# Git-specific
+.git/
+*.orig
+*.lock
+
+# pytest
+.pytest_cache/
+
+# ruff
+.ruff_cache

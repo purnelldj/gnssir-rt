@@ -16,17 +16,13 @@ def plotrhspline(
     plotrh=True,
     plotspec=True,
     figoutstr="rhsplineout.png",
-    **kwargs
+    **kwargs,
 ):
     # then get arcs and plot
     arcs = rh_arr[:, 1]
     print("mean height of arcs is " + str(np.nanmean(arcs)))
     arcs_dn = gps2datenum(np.array(rh_arr[:, 0], dtype=float))
-    print(
-        "avg of "
-        + str(round(len(arcs) / ((rh_arr[-1, 0] - rh_arr[0, 0]) / 86400)))
-        + " arcs per day"
-    )
+    print("avg of " + str(round(len(arcs) / ((rh_arr[-1, 0] - rh_arr[0, 0]) / 86400))) + " arcs per day")
     print("with " + str(len(np.unique(arcs))) + " total arcs")
     if plotfig:
         plt.rcParams.update({"font.family": "Times New Roman", "font.size": 10})
@@ -70,9 +66,7 @@ def plotrhspline(
             pspec.set_label("Spline fit")
             if plotknots:
                 kval_spectral_plot = kval_spectral
-                (pknot,) = plt.plot_date(
-                    knots_dn, kval_spectral_plot, ".", markersize=10
-                )
+                (pknot,) = plt.plot_date(knots_dn, kval_spectral_plot, ".", markersize=10)
                 pknot.set_label("knots")
 
     if plotfig:
