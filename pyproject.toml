@@ -1,25 +1,35 @@
-[tool.poetry]
-name = "gnssir-rt"
-version = "1.0.0"
+[project]
+name = "gnssir_rt"
+version = "1.1.0"
 description = "processing tools for GNSS-IR water level monitoring"
-authors = ["David Purnell <davejpurnell@gmail.com>"]
+authors = [
+    { name = "David Purnell", email = "davejpurnell@gmail.com" }
+]
 readme = "README.md"
+requires-python = ">= 3.9"
+dependencies = [
+    "astropy",
+    "hydra-core",
+    "matplotlib",
+    "numpy",
+    "scipy",
+    "zenodo-get",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-matplotlib = "^3.8.2"
-numpy = "^1.26.2"
-astropy = "^6.0.0"
-scipy = "^1.11.4"
-black = "^23.11.0"
-flake8 = "^6.1.0"
-pre-commit = "^3.5.0"
-isort = "^5.12.0"
-pytest = "^7.4.3"
-zenodo-get = "^1.5.1"
-hydra-core = "^1.3.2"
-
+[project.optional-dependencies]
+dev = [
+  "ruff",
+  "pre-commit",
+  "pytest",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+gnssir = "gnssir_rt.main_cl:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gnssir_rt"]

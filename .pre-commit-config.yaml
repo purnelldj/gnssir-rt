@@ -1,30 +1,29 @@
 repos:
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.5.4
+    hooks:
+      # - id: forbid-crlf - seems to be a conflict with windows
+      # - id: remove-crlf
+      - id: forbid-tabs
+      - id: remove-tabs
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
-      # list of supported hooks: https://pre-commit.com/hooks.html
       - id: trailing-whitespace
-      - id: end-of-file-fixer
+      - id: check-merge-conflict
       - id: check-yaml
-      # - id: check-added-large-files
-
-  # format code
-  - repo: https://github.com/psf/black
-    rev: 23.12.0
+        args: [--unsafe]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.6.4
     hooks:
-      - id: black
-        args: []
-
-  # check imports
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+      # Run the linter.
+      - id: ruff
+        args: [--fix]
+      # Run the formatter.
+      - id: ruff-format
+  - repo: https://github.com/jsh9/pydoclint
+    rev: 0.6.2
     hooks:
-      - id: isort
-        args: ["--profile", "black", "--filter-files"]
-
-  # check code
-  - repo: https://github.com/PyCQA/flake8
-    rev: 6.1.0
-    hooks:
-      - id: flake8
-        args: []
+      - id: pydoclint
+        args: [--config, pyproject.toml]
