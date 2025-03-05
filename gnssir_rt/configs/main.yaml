@@ -2,12 +2,12 @@ defaults:
   - site: sjdlr
   - _self_
 
-# set run from command line
-run: set_function_name
+# set task from command line
+task: set_function_name
 
 # directories and files
 cwd: ${hydra:runtime.cwd}
-site_parent: ${cwd}/localproc/
+site_parent: ${cwd}/data/
 site_name: ${hydra:runtime.choices.site}
 stationdir: ${site_parent}${site_name}
 snrdir: ${stationdir}/snr

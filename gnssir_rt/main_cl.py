@@ -12,15 +12,15 @@ def main(cfg: DictConfig):
 
     pyargs = load_cfg(cfg)
 
-    if cfg.run == "snr2arcs":
+    if cfg.task == "snr2arcs":
         snr2arcs(**pyargs)
-    elif cfg.run == "arcsplot":
+    elif cfg.task == "arcsplot":
         arcsplot(**pyargs)
-    elif cfg.run == "arcs2splines":
+    elif cfg.task == "arcs2splines":
         arcs2splines(**pyargs)
     else:
-        print(f"input function '{cfg.run}' not recognized ")
-        print("e.g., set run=snr2arcs from command line")
+        print(f"input function '{cfg.task}' not recognized ")
+        print("e.g., set task=snr2arcs from command line")
 
 
 def load_cfg(cfg):
