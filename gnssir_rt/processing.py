@@ -72,13 +72,9 @@ def snr2arc(
     if "azilims" in kwargs:
         azilims = kwargs.get("azilims")
         if azilims[0] < azilims[1]:
-            tfilter = np.logical_and(
-                snrdata[:, 2] > azilims[0], snrdata[:, 2] < azilims[1]
-            )
+            tfilter = np.logical_and(snrdata[:, 2] > azilims[0], snrdata[:, 2] < azilims[1])
         else:
-            tfilter = np.logical_or(
-                snrdata[:, 2] > azilims[0], snrdata[:, 2] < azilims[1]
-            )
+            tfilter = np.logical_or(snrdata[:, 2] > azilims[0], snrdata[:, 2] < azilims[1])
         snrdata = snrdata[tfilter]
 
     rh_arr = np.empty((0, 12), dtype=object)
@@ -112,9 +108,7 @@ def snr2arc(
         delv = np.ediff1d(elv_tosort)
         bkpt = len(ddate)
         bkpt = np.append(bkpt, np.where(ddate > gaptlim)[0])  # gaps bigger than gaptlim
-        bkpt = np.append(
-            bkpt, np.where(np.diff(np.sign(delv)))[0]
-        )  # elevation rate changes direction
+        bkpt = np.append(bkpt, np.where(np.diff(np.sign(delv)))[0])  # elevation rate changes direction
         bkpt = np.unique(bkpt)
         bkpt = np.sort(bkpt)
         for ii in range(len(bkpt)):
@@ -152,9 +146,7 @@ def snr2arc(
             peaks = peaks[peakssort]
             pktn = np.max(pgram_sub) / np.mean(pgram_sub)
             curind = maxind
-            if (
-                curind != 0 and curind != len(pgram_sub) - 1
-            ):  # no peaks at either end of window
+            if curind != 0 and curind != len(pgram_sub) - 1:  # no peaks at either end of window
                 temp_arr = np.empty((1, 12), dtype=object)
                 # here just saving some stats for each satellite arc
                 arcid = str(int(sat)) + "_" + str(int(np.min(datet)))
@@ -162,9 +154,7 @@ def snr2arc(
                 temp_arr[0, 1] = reflh_sub[curind]  # reflector height
                 temp_arr[0, 2] = sat  # sat prn
                 dthdt = ((elvt[-1] - elvt[0]) / 180 * np.pi) / (datet[-1] - datet[0])
-                temp_arr[0, 3] = (
-                    np.tan(np.mean(elvt) / 180 * np.pi) / dthdt
-                )  # tane / (de/dt)
+                temp_arr[0, 3] = np.tan(np.mean(elvt) / 180 * np.pi) / dthdt  # tane / (de/dt)
                 temp_arr[0, 4] = np.min(elvt)  # min elv
                 temp_arr[0, 5] = np.max(elvt)  # max elv
                 temp_arr[0, 6] = np.mean(azit)  # mean azimuth
@@ -324,9 +314,7 @@ def collectarcs(
     for arcd in arcdir:
         tfs = listdir(arcd)
         tfs = [tf for tf in tfs if tf[-4:] == ".pkl"]
-        ttfdates = [
-            datetime.datetime.strptime(tf[0:14], "%y_%m_%d_%H_%M") for tf in tfs
-        ]
+        ttfdates = [datetime.datetime.strptime(tf[0:14], "%y_%m_%d_%H_%M") for tf in tfs]
         tfdates = np.append(tfdates, ttfdates)
     tfdates = np.unique(tfdates)
     try:
@@ -349,9 +337,7 @@ def collectarcs(
                 snrdt_arrtt = pickle.load(f)
                 f.close()
                 rh_arrtt[:, 1] = rh_arrtt[:, 1] - hgts[ii]
-                snrdt_arrtt = np.column_stack(
-                    (snrdt_arrtt, np.empty(np.ma.size(snrdt_arrtt, axis=0)))
-                )
+                snrdt_arrtt = np.column_stack((snrdt_arrtt, np.empty(np.ma.size(snrdt_arrtt, axis=0))))
                 snrdt_arrtt[:, 5] = hgts[ii]
                 arcid = False
                 if arcid:
@@ -359,9 +345,7 @@ def collectarcs(
                     rh_arrtt[:, 11] = newarcid
                     newarcid = [str(ii) + "_" + oldid for oldid in snrdt_arrtt[:, 4]]
                     snrdt_arrtt[:, 4] = newarcid
-                rh_arrtt = np.column_stack(
-                    (rh_arrtt, np.empty(np.ma.size(rh_arrtt, axis=0)))
-                )
+                rh_arrtt = np.column_stack((rh_arrtt, np.empty(np.ma.size(rh_arrtt, axis=0))))
                 rh_arrtt[:, 12] = hgts[ii]
                 rh_arrt = np.vstack((rh_arrt, rh_arrtt))
                 snrdt_arrt = np.vstack((snrdt_arrt, snrdt_arrtt))
@@ -411,13 +395,9 @@ def arcsqc(rh_arr, snrdt_arr, qc_std=True, **kwargs):
     if "azilims" in kwargs:
         azilims = kwargs.get("azilims")
         if azilims[0] < azilims[1]:
-            tfilter = np.logical_and(
-                rh_arr[:, 6] > azilims[0], rh_arr[:, 6] < azilims[1]
-            )
+            tfilter = np.logical_and(rh_arr[:, 6] > azilims[0], rh_arr[:, 6] < azilims[1])
         else:
-            tfilter = np.logical_or(
-                rh_arr[:, 6] > azilims[0], rh_arr[:, 6] < azilims[1]
-            )
+            tfilter = np.logical_or(rh_arr[:, 6] > azilims[0], rh_arr[:, 6] < azilims[1])
         rh_arr = rh_arr[tfilter, :]
 
     if "minpsd" in kwargs:
@@ -459,9 +439,7 @@ def arcsqc(rh_arr, snrdt_arr, qc_std=True, **kwargs):
         snrqc = kwargs.get("snrqc")
         if snrqc:
             snrdt_arr = snrdt_arr[np.isin(snrdt_arr[:, 4], np.unique(rh_arr[:, 11]))]
-    snrdt_arr[:, 4] = snrdt_arr[
-        :, 5
-    ]  # the column going into arcs2spline needs to be the hgt
+    snrdt_arr[:, 4] = snrdt_arr[:, 5]  # the column going into arcs2spline needs to be the hgt
     snrdt_arr = snrdt_arr[:, :5]
     return rh_arr, snrdt_arr
 
@@ -516,9 +494,7 @@ def arcs2spline(rh_arr, snrdt_arr, knots, doplot=False, tropd_adj=True, **kwargs
     # print('max gap is ' + str(int(maxtgap / 60)) + ' minutes')
 
     if maxtgap > kdt * 1.05:  # giving 5% margin?
-        print(
-            "gap in data bigger than node spacing - continue with risk of instabilities if you want"
-        )
+        print("gap in data bigger than node spacing - continue with risk of instabilities if you want")
         print("continuing")
         # return invout, rh_arr
 
@@ -536,9 +512,7 @@ def arcs2spline(rh_arr, snrdt_arr, knots, doplot=False, tropd_adj=True, **kwargs
     kval_spectral = ls_out[0]
     # print('ls took %.3f seconds' %(time.time() - prels))
     for ii in range(len(knots) - 1):
-        findrh = np.logical_and(
-            rh_arr[:, 0] >= knots[ii], rh_arr[:, 0] <= knots[ii + 1]
-        )
+        findrh = np.logical_and(rh_arr[:, 0] >= knots[ii], rh_arr[:, 0] <= knots[ii + 1])
         if np.ma.size(rh_arr[findrh], axis=0) == 0:
             print("got rid of a kval")
             print("#################################")
@@ -611,9 +585,7 @@ def arcs2splines(
             knott = invout["knots"]
             tplott = np.linspace(knott[0], knott[-1], int(knott[-1] - knott[0] + 1))
             try:
-                spectspline = cubspl_nans(
-                    tplott, invout["knots"], invout["kval_spectral"]
-                )
+                spectspline = cubspl_nans(tplott, invout["knots"], invout["kval_spectral"])
                 idlat = latency + 1
                 spect = spectspline[-idlat]
                 offt = tplott[-idlat]

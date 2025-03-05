@@ -6,6 +6,7 @@ kristine larson
 edited for:
 https://ieeexplore.ieee.org/document/10078314
 """
+
 import os
 import pickle
 
@@ -80,7 +81,7 @@ def makegptfile(gptfile, gpt_init_file, site_lat, site_lon):
         ilon = 360
 
     #     get the number of the corresponding line
-    # 	 changed for the 1 degree grid (GP)
+    #    changed for the 1 degree grid (GP)
     indx[0] = (ipod - 1) * 360 + ilon
     #  save the lat lon of the grid points
     indx_lat[0] = 90 - ipod + 1
@@ -194,12 +195,12 @@ def gpt2_1w(gptfile, dmjd, dlat, dlon, hell, it):
     ppod = (-dlat + np.pi / 2) * 180 / np.pi
 
     #       % find the index (line in the grid file) of the nearest point
-    #  	  % changed for the 1 degree grid (GP)
+    #     % changed for the 1 degree grid (GP)
     ipod = np.floor(ppod + 1)
     ilon = np.floor(plon + 1)
 
     #   normalized (to one) differences, can be positive or negative
-    # 	% changed for the 1 degree grid (GP)
+    #   % changed for the 1 degree grid (GP)
     diffpod = ppod - (ipod - 0.5)
     difflon = plon - (ilon - 0.5)
 
@@ -363,9 +364,7 @@ def gpt2_1w(gptfile, dmjd, dlat, dlon, hell, it):
         # % on the grid
         aa = 100 * pl[ll] / p0
         bb = lal[ll] + 1
-        el[ll] = e0 * np.power(
-            aa, bb
-        )  # % on the station height - (14) Askne and Nordius, 1987
+        el[ll] = e0 * np.power(aa, bb)  # % on the station height - (14) Askne and Nordius, 1987
 
     dnpod1 = np.abs(diffpod)
     # % distance nearer point

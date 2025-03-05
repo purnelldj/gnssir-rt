@@ -6,17 +6,7 @@ import numpy as np
 from gnssir_rt.make_gpt import gpt2_1w, makegptfile
 
 
-def tropd(
-    gpst,
-    rh_arr,
-    iminelv=4,
-    imaxelv=5,
-    irh=1,
-    iahgt=12,
-    it=0,
-    adjtype="allelv",
-    **kwargs
-):
+def tropd(gpst, rh_arr, iminelv=4, imaxelv=5, irh=1, iahgt=12, it=0, adjtype="allelv", **kwargs):
     """
     it = 0 means time variable GPT or it = 1 is static
     """
@@ -32,11 +22,7 @@ def tropd(
         metdata = pickle.load(f)
         f.close()
         dtt = metdata[:, 0]
-        idt = [
-            idt
-            for idt in range(len(dtt))
-            if dtt[idt] - gpst == np.min(np.abs(dtt - gpst))
-        ]
+        idt = [idt for idt in range(len(dtt)) if dtt[idt] - gpst == np.min(np.abs(dtt - gpst))]
         pant = metdata[idt, 1]
         tant = metdata[idt, 2]
         eant = metdata[idt, 3]
@@ -44,9 +30,7 @@ def tropd(
         if not os.path.isfile(gptfile):
             makegptfile(gptfile, gpt_init_file, lla[0], lla[1])
         dmjd = gps2dmjd(gpst)
-        pant, tant, _, _, eant, _, _, _, _ = gpt2_1w(
-            gptfile, dmjd, lla[0], lla[1], lla[2], it
-        )
+        pant, tant, _, _, eant, _, _, _, _ = gpt2_1w(gptfile, dmjd, lla[0], lla[1], lla[2], it)
 
     if adjtype == "minmaxelv":
         rh_arr[:, irh] = rh_arr[:, irh] + rh_arr[:, iahgt]
@@ -129,12 +113,7 @@ def relhumtemp2e(relhum, temp):
 
 def bend_eqn(p, t, elv):
     bending_corr_arc_min = (
-        510
-        / (9 / 5 * t + 492)
-        * p
-        / 1010.16
-        * 1
-        / np.tan(np.deg2rad(elv + 7.31 / (elv + 4.4)))
+        510 / (9 / 5 * t + 492) * p / 1010.16 * 1 / np.tan(np.deg2rad(elv + 7.31 / (elv + 4.4)))
     )
     bending_corr_deg = bending_corr_arc_min / 60
     return bending_corr_deg
