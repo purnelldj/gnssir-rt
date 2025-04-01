@@ -10,6 +10,10 @@ Each release can have sections: "Added", "Changed", "Deprecated", "Removed", "Fi
 
 ## pre-release
 
+### Added
+
+- types, docstrings and comments
+
 ### Changed
 
 - renamed to gnssir-rt
