@@ -16,6 +16,7 @@ Each release can have sections: "Added", "Changed", "Deprecated", "Removed", "Fi
 
 ### Changed
 
+- improved readme
 - renamed to gnssir-rt
 
 ## [1.1.0] - 2025-03-04
